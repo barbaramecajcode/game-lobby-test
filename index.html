@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#12110e" />
+    <meta name="description" content="Halden. A members' game floor." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <title>Halden</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem('halden.theme')
+          if (theme !== 'light' && theme !== 'dark') {
+            theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+          }
+          document.documentElement.dataset.theme = theme
+          var hue = localStorage.getItem('halden.hue')
+          if (hue && /^\d{1,3}$/.test(hue)) document.documentElement.style.setProperty('--hue', hue)
+          var lang = localStorage.getItem('halden.lang')
+          if (lang !== 'de' && lang !== 'ar') lang = 'en'
+          document.documentElement.lang = lang
+          document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
